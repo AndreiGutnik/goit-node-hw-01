@@ -4,21 +4,19 @@ const path = require("path");
 
 const contactsPath = path.join(__dirname, "db/contacts.json");
 
+// function is return the list of all contacts
 async function listContacts() {
-  // ...твій код. Повертає масив контактів.
   const data = await fs.readFile(contactsPath);
   return JSON.parse(data);
 }
-
+// function is return contact by id
 async function getContactById(contactId) {
-  // ...твій код. Повертає об'єкт контакту з таким id. Повертає null, якщо контакт з таким id не знайдений.
   const contacts = await listContacts();
   const result = contacts.find((item) => item.id === contactId);
   return result || null;
 }
-
+// function is remove contact and return this removing contact
 async function removeContact(contactId) {
-  // ...твій код. Повертає об'єкт видаленого контакту. Повертає null, якщо контакт з таким id не знайдений.
   const contacts = await listContacts();
   const index = contacts.findIndex((item) => item.id === contactId);
   if (index === -1) {
@@ -29,8 +27,8 @@ async function removeContact(contactId) {
   return deletedContact;
 }
 
+// function is add new contact and return it
 async function addContact(name, email, phone) {
-  // ...твій код. Повертає об'єкт доданого контакту.
   const contacts = await listContacts();
   const newContact = {
     id: nanoid(),
